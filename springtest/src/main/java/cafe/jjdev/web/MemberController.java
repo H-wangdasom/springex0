@@ -9,11 +9,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import cafe.jjdev.web.service.Member;
 import cafe.jjdev.web.service.MemberDao;
+import cafe.jjdev.web.service.MemberService;
 
 @Controller
 public class MemberController {
 	@Autowired //new 연산자를 없애기 위해 private으로 하고 꼭 @Autowired써야 밑에와 같은 타입으로 선언해준다.
 	private MemberDao memberDao;
+	@Autowired 
+	private MemberService memberService;
 	
 	@RequestMapping(value="/memberList")
 	public String memberList() {
@@ -24,9 +27,11 @@ public class MemberController {
 	
 	//Spring에서 가장많이 사용하는 방법
 	@RequestMapping(value="/addMember", method = RequestMethod.POST)
+	
 		//1.command객체로 매개변수 받는 방법
 	public String addMember(MemberRequest memberRequest) {	//현재는 Member객체의  member를 사용해도 된다. 근데 현실로 가면 같은경우가 별로 없어서 새로 만들어야된다.
 		System.out.println(memberRequest);
+		memberService.addMember(memberRequest);
 		return "redirect:/memberList";	//  response.sendRedirect("/memberList")    view 존재 
 	}
 	
