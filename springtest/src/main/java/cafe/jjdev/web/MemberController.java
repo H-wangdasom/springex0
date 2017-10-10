@@ -24,13 +24,20 @@ public class MemberController {
 	@Autowired 
 	private MemberService memberService;
 	
+	//로그아웃
+	@RequestMapping(value="/logout")
+	public String logout(HttpSession session) {
+		session.invalidate(); //session 무효화 시킴
+		return "redirect:/login";
+	}
+	
 	//로그인 폼
 	@RequestMapping(value="/login", method= RequestMethod.GET)
 	public String login(HttpSession session) {
 		if(session.getAttribute("loginMember") == null) {
-			return "test";
+			return "login";
 		}
-		return "login";
+		return "redirect:/test";
 	}
 	
 	//로그인 처리
