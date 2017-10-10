@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,20 +7,18 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>memberList</h1>
+	<h1>로그인</h1>
+	<form actiom="./login" method="post">
 	<table border="1">
 		<tr>
-			<td>NO</td>
 			<td>ID</td>
-			<td>NAME</td>
+			<td><input type="text" name="memberId"></td>
 		</tr>
-		<c:forEach var="member" items="${list}">
 		<tr>
-			<td>${member.memberNo}</td>
-			<td>>${member.memberId}</td>
-			<td>>${member.memberName}</td>
-		</tr>
-		</c:forEach>
+			<td>PW</td>
+			<td><input type="text" name="memberPw"></td>
+		<input type="submit" value="로그인">
 	</table>
+	</form>
 </body>
 </html>

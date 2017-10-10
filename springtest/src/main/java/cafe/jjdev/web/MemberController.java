@@ -1,11 +1,17 @@
 package cafe.jjdev.web;
 
+
+
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 import cafe.jjdev.web.service.Member;
 import cafe.jjdev.web.service.MemberDao;
@@ -18,10 +24,44 @@ public class MemberController {
 	@Autowired 
 	private MemberService memberService;
 	
+	//로그인 폼
+	@RequestMapping(value="/login", method= RequestMethod.GET)
+	public String login(HttpSession session) {
+		if(session.getAttribute("loginMember") == null) {
+			return "test";
+		}
+		return "login";
+	}
+	
+	//로그인 처리
+	@RequestMapping(value="/login", method= RequestMethod.POST)
+	public String login(Member member, HttpSession session) {
+		//로그인 프로세스 진행
+		Member loginMember = memberDao.logon(member);
+		if(loginMember == null) {
+			System.out.println("로그인 노널");
+			return "redirect:/login";
+		} else {
+			//session에 로그인 정보를 저장  매개변수로 session을 받으면 된다.
+			session.setAttribute("loginMember", loginMember);
+			return "redirect:/test";
+		}
+	}
+	
+	//회원전용 페이지
+	@RequestMapping(value="/test")
+	public String test(HttpSession session) {
+		if(session.getAttribute("loginMember") == null) {
+			return "redirect:/login";
+		}
+		return "test";
+	}
+	
 	@RequestMapping(value="/memberList")
-	public String memberList() {
+	public String memberList(Model model) {
 		System.out.println("memberList 요청");
-		//DB list get....
+		List<Member> list = memberDao.selectMemberList();
+		model.addAttribute("list",list);
 		return "memberList";
 	}
 	
