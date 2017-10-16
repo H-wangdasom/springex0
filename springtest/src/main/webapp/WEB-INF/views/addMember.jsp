@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 </head>
+<% request.setCharacterEncoding("euc-kr"); %>
 <body>
 	<h1>addMember</h1>
 	<form action="./addMember" method="post">
