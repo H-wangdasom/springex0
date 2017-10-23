@@ -2,8 +2,9 @@
 <web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
 http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-	version="3.0"><!-- 2.5버전이였는데, 박쌤 카페에있는 버전 3.0으로 변경하였음. -->
-	<!-- api를 바꿀필요는 없다.톰캣에 3.1로 되어있을것이다. -->
+	version="3.0">
+	<!-- 2.5버전이였는데, 박쌤 카페에있는 버전 3.0으로 변경하였음. 버전이 낮으면 상위버전에 있는 설정을 사용할수 없다. -->
+	<!-- api를 바꿀필요는 없다.톰캣에 servlet이3.1이상으로로 되어있을것이다. -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/spring/root-context.xml</param-value>
@@ -19,9 +20,9 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
-		<multipart-config>
-			<location>c:\temp</location><!-- location은 파일 저장소라고카페24는 아마도 리눅스 일것이다. 정궁금하면 이전기수의 깃 주소 들어가서 확인하자. -->
-			<max-file-size>-1</max-file-size><!-- 파일 용량을 얼만큼 할지 정하는건데, 무한대라고 생각하면된다. -->
+		<multipart-config><!--파일 업로드를 위한 어노테이션  -->
+			<location>c:\temp</location><!-- location은 파일 임시저장소라고카페24는 아마도 리눅스 일것이다. 정궁금하면 이전기수의 깃 주소 들어가서 확인하자. -->
+			<max-file-size>-1</max-file-size><!--max-~~~-sizw 파일 용량을 얼만큼 허용하는지 정하는건데, 무한대라고 생각하면된다. -->
 			<max-request-size>-1</max-request-size>
 			<file-size-threshold>-1</file-size-threshold>
 		</multipart-config>

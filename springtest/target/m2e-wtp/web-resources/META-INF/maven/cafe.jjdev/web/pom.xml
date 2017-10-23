@@ -26,6 +26,12 @@
 			<version>4.3.11.RELEASE</version>
 		</dependency>
 		
+		<!-- RestController사용시 json문자열 리턴-->
+		<dependency>
+	        <groupId>com.fasterxml.jackson.core</groupId>
+	        <artifactId>jackson-databind</artifactId>
+	        <version>2.8.1</version>
+		</dependency>	
 		<!-- connection pool -->
 		<dependency>
 			<groupId>commons-dbcp</groupId>
